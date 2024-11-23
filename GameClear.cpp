@@ -4,10 +4,7 @@
 GameClear::GameClear(GameObject* parent)
 	:count(50)
 {
-	clear = LoadGraph("Assets/Clear.png");
-	mori = LoadGraph("Assets/mori1.jpg");
-	SpaceButton = LoadGraph("Assets/s.png");
-	EscButton = LoadGraph("Assets/e.png");
+	clear = LoadGraph("Assets/CLEAR_.png");
 }
 
 void GameClear::Update()
@@ -51,12 +48,13 @@ void GameClear::Update()
 
 void GameClear::Draw()
 {
-	DrawGraph(0, 0, mori, TRUE);
-	DrawGraph(150, 200, clear, TRUE);
-	DrawGraph(150, 400, SpaceButton, TRUE);
-	DrawGraph(260, 500, EscButton, TRUE);
+	DrawGraph(0, 0, clear, TRUE);
 }
 
 void GameClear::Release()
 {
+	if (clear > 0)
+	{
+		InitGraph(clear);
+	}
 }

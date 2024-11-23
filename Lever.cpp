@@ -24,6 +24,7 @@ Lever::Lever(GameObject* scene)
 	lMas = ((LeverMaster*)(this->GetParent()));
 	fi = lMas->GetParent()->FindGameObject<Field>();
 	soundHandle = LoadSoundMem("Assets/ƒŒƒo[.mp3");
+	assert(soundHandle > 0);
 }
 
 Lever::~Lever()

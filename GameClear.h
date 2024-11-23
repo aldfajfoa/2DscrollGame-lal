@@ -13,8 +13,5 @@ public:
 	void Release() override;
 private:
 	int clear;
-	int mori;
-	int SpaceButton;
-	int EscButton;
 	XINPUT_STATE input;
 };

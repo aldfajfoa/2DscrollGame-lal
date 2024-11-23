@@ -23,6 +23,7 @@ public:
 	/// <param name="x">Xç¿ïW</param>
 	/// <param name="y">Yç¿ïW</param>
 	void SetPosition(int x, int y);
+	int GetPositionX() { return transform_.position_.x; }
 	void Reset();
 	bool GetReversX() { return ReversX; }
 	void ControlCollision();

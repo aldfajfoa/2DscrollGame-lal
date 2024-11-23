@@ -93,10 +93,10 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\GE2A06\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\Coad\プロジェクトに追加すべきファイル_VC用;C:\Users\Masay\source\repos\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\プロジェクトに追加すべきファイル_VC用;D:\GE2A06\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\Coad\プロジェクトに追加すべきファイル_VC用;C:\Users\Masay\source\repos\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\GE2A06\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\Coad\プロジェクトに追加すべきファイル_VC用;D:\GE2A 21\code\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\coad\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories);C:\Program Files\Microsoft Visual Studio\プロジェクトに追加すべきファイル_VC用 4\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\Users\Masay\source\repos\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\Coad\プロジェクトに追加すべきファイル_VC用;D:\GE2A 21\code\プロジェクトに追加すべきファイル_VC用;D:\GE2A21\coad\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories);C:\Program Files\Microsoft Visual Studio\プロジェクトに追加すべきファイル_VC用 4\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;C:\Users\Masay\source\repos\プロジェクトに追加すべきファイル_VC用 1\プロジェクトに追加すべきファイル_VC用</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

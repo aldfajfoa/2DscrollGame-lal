@@ -32,11 +32,11 @@ Stone::~Stone()
 void Stone::Update()
 {
 	tmpPosx = transform_.position_.x;
-	tmpPosy = transform_.position_.y;
+	tmpPosy = transform_.position_.y; 
 
 	pField = GetParent()->FindGameObject<Field>();
 
-	int push = pField->CollisionRight(transform_.position_.x + 25, transform_.position_.y + 18);
+	int push = pField->CollisionRight(transform_.position_.x + 20, transform_.position_.y + 15);
 
 	if (push > 1)
 	{
@@ -49,12 +49,12 @@ void Stone::Update()
 		colR = false;
 	}
 
-	push = pField->CollisionLeft(transform_.position_.x, transform_.position_.y + 18);
+	push = pField->CollisionLeft(transform_.position_.x, transform_.position_.y + 15);
 
 	if (push > 1)
 	{
 		int tmp = transform_.position_.x;
-		transform_.position_.x += tmp % 32 / 10;
+		transform_.position_.x += tmp % 32 / 16;
 		colL = true;
 	}
 	else
@@ -64,7 +64,9 @@ void Stone::Update()
 
 	if (pField != nullptr)
 	{
-		int push = pField->CollisionDown(transform_.position_.x+10, transform_.position_.y + 19);
+		int pushR = pField->CollisionDown(transform_.position_.x, transform_.position_.y + 18);
+		int pushL = pField->CollisionDown(transform_.position_.x + 18, transform_.position_.y + 18);
+		int push = max(pushR, pushL);//‚Q‚Â‚Ì‘«Œ³‚Ì‚ß‚èž‚Ý‚Ì‘å‚«‚¢•û
 
 		if (push > 1)
 		{
@@ -99,7 +101,9 @@ void Stone::Update()
 
 		if (pField != nullptr)
 		{
-			int push = pField->CollisionDown(transform_.position_.x, transform_.position_.y + 19);
+			int pushR = pField->CollisionDown(transform_.position_.x, transform_.position_.y + 18);
+			int pushL = pField->CollisionDown(transform_.position_.x + 18, transform_.position_.y + 18);
+			int push = max(pushR, pushL);//‚Q‚Â‚Ì‘«Œ³‚Ì‚ß‚èž‚Ý‚Ì‘å‚«‚¢•û
 
 			if (push > 0)
 			{

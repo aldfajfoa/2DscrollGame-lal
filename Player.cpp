@@ -1,7 +1,5 @@
 #include "Engine/SceneManager.h"
 #include "Player.h"
-#include <DxLib.h>
-#include <assert.h>
 #include "Stone.h"
 #include "Camera.h"
 #include "Field.h"
@@ -11,7 +9,6 @@
 #include "SpeedStone.h"
 #include "TestScene.h"
 #include "LeverMaster.h"
-#include "LeverBrock.h"
 
 namespace {
 	const Size P_SIZE = { 80,88 };
@@ -20,7 +17,6 @@ namespace {
 	const float GRAVITY = 9.8f / 60.0f;//d—Í‰Á‘¬“x
 	const int MAX_STONE = 20; //¬Î‚ð“Š‚°‚ê‚éÅ‘å”
 	float STONE_NUMBER = 940;
-	//const float INITIALVELOCITY = 18.0f;
 }
 
 
@@ -54,7 +50,6 @@ Player::~Player()
 	{
 		DeleteGraph(PlayerG);
 	}
-	//InitGraph()
 }
 
 
@@ -70,7 +65,6 @@ void Player::Update()
 	lMas = GetParent()->FindGameObject<LeverMaster>();
 
 	counter -= 1;
-	//rcount += 1;
 
 	TestScene* scene = dynamic_cast<TestScene*>(GetParent());
 	if (!scene->CanMove())
@@ -97,47 +91,14 @@ void Player::Update()
 
 	ControlCollision();
 
-	//if (pField != nullptr)
-	//{
-	//	//(50,64)‚Æ(14,64)‚àŒ©‚é
-	//	int pushR = pField->CollisionDown(transform_.position_.x + 80, transform_.position_.y + 80);
-	//	int pushL = pField->CollisionDown(transform_.position_.x + 14, transform_.position_.y + 80);
-	//	int push = max(pushR, pushL);//‚Q‚Â‚Ì‘«Œ³‚Ì‚ß‚èž‚Ý‚Ì‘å‚«‚¢•û
-	//	if (push >= 1) {
-	//		transform_.position_.y -= push - 1;
-	//		jumpSpeed = 0.0f;
-	//		onGround = true;
-	//	}
-	//	else {
-	//		onGround = false;
-	//	}
-	//}
-
 	if (transform_.position_.y > Ground) {
 		transform_.position_.y = Ground;
 		jumpSpeed = 0.0f;
 	}
 
-	//if (CheckHitKey(KEY_INPUT_SPACE))
-	//{
-	//	if (prevSpaceKey == false)
-	//	{
-	//		if (onGround) {
-	//			jumpSpeed = -sqrtf(2 * (GRAVITY)*JUMP_HEIGHT);
-	//			onGround = false;
-	//		}
-	//	}
-	//	prevSpaceKey = true;
-	//}
-	//else
-	//{
-	//	prevSpaceKey = false;
-	//}
-
 	//Î‚ð“Š‚°‚é
 	if (count == MAX_STONE)
 	{
-
 	}
 	else
 	{
@@ -278,12 +239,8 @@ void Player::Draw()
 
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	DrawRectGraph(x-field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, PlayerG, TRUE, ReversX);
-	DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, StoneLine, TRUE, ReversX);
-	if (p_speed == 0)
-	{
-		DrawCircle(50, 50, 10, 255);
-	}
+	DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, PlayerG, TRUE, ReversX);
+	//DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, StoneLine, TRUE, ReversX);
 }
 
 void Player::Release()
@@ -308,37 +265,56 @@ void Player::ControlCollision()
 {
 	Field* map = GetParent()->FindGameObject<Field>();
 
-	int collX1 = P_SIZE.w / 4;
-	int collX2 = P_SIZE.w - collX1;
-	int collY1 = P_SIZE.h / 5;
-	int collY2 = P_SIZE.h - collY1;
+	int push = map->CollisionRight(transform_.position_.x + P_SIZE.w-10, transform_.position_.y + 80);
 
-	if (map->IsCollisionRight(collY1) || map->IsCollisionRight(collY2)) {
-		transform_.position_.x -= tmpPosx % 32 / 10;
+	if (push > 1)
+	{
+		int tmp = transform_.position_.x;
+		transform_.position_.x -= tmp % 32 / 10;
 	}
 
-	if (map->IsCollisionLeft(collY1) || map->IsCollisionLeft(collY2)) {
-		transform_.position_.x += tmpPosx % 32 / 10;
+	push = map->CollisionLeft(transform_.position_.x+10, transform_.position_.y + 80);
+
+	if (push > 1)
+	{
+		int tmp = transform_.position_.x;
+		transform_.position_.x += tmp % 32 / 10;
 	}
 
-	if (map->IsCollisionUp(collX1) || map->IsCollisionUp(collX2)) {
+    push = map->CollisionUp(transform_.position_.x + P_SIZE.w/2, transform_.position_.y);
+
+	if (push > 1)
+	{
+		int tmp = transform_.position_.x;
+		transform_.position_.x -= tmp % 32 / 10;
 		ceiling = tmpPosy;
 	}
 	else {
 		ceiling = 0;
 	}
 
-	if (map->IsCollisionDown(collX1) || map->IsCollisionDown(collX2)) {
+	if (map != nullptr)
+	{
 		if (firstGround) {
 			Ground -= 20;
 			firstGround = false;
 		}
 		else {
-			Ground = tmpPosy;
+			int pushR = map->CollisionDown(transform_.position_.x + 60, transform_.position_.y + 85);
+			int pushL = map->CollisionDown(transform_.position_.x + 25, transform_.position_.y + 85);
+			int push = max(pushR, pushL);//‚Q‚Â‚Ì‘«Œ³‚Ì‚ß‚èž‚Ý‚Ì‘å‚«‚¢•û
+			if (push >= 1)
+			{
+				transform_.position_.y -= push - 1;
+				jumpSpeed = 0.0f;
+				onGround = true;
+			}
+			else
+			{
+				Ground = 1000;
+				onGround = false;
+			}
 		}
-	}
-	else {
-		Ground = 1000;
 	}
 }
 

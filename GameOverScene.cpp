@@ -5,7 +5,7 @@
 GameOverScene::GameOverScene(GameObject* parent)
 	:count(50)
 {
-	over = LoadGraph("Assets/GameOver.png");
+	over = LoadGraph("Assets/GAMEOVER_.png");
 	s = LoadGraph("Assets/s.png");
 	q = LoadGraph("Assets/q.png");
 	counter = 0;
@@ -51,11 +51,13 @@ void GameOverScene::Update()
 
 void GameOverScene::Draw()
 {
-	DrawGraph(150, 200, over, TRUE);
-	DrawGraph(150, 400, s, TRUE);
-	DrawGraph(260, 500, q, TRUE);
+	DrawGraph(0, 0, over, TRUE);
 }
 
 void GameOverScene::Release()
 {
+	if (over > 0)
+	{
+		InitGraph(over);
+	}
 }

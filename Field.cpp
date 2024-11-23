@@ -17,10 +17,10 @@ Field::Field(GameObject* scene)
 	hImage = LoadGraph("Assets/bgchar.png");
 	background = LoadGraph("Assets/mori.jpg");
 	stone = LoadGraph("Assets/isi.png");
-	sousa = LoadGraph("Assets/sousa.png");
-	//controll = LoadGraph("Assets/Controll.png");
+	controll = LoadGraph("Assets/Controll.png");
 	assert(hImage > 0);
 	assert(background > 0);
+	assert(controll > 0);
 	Map = nullptr;
 	scroll = 0;
 }
@@ -33,6 +33,7 @@ Field::~Field()
 		InitGraph(hImage);
 		InitGraph(background);
 		InitGraph(stone);
+		InitGraph(controll);
 	}
 	if (Map != nullptr) {
 		delete[] Map; //Mapは配列
@@ -48,7 +49,7 @@ void Field::Reset()
 		Map = nullptr;
 	}
 	CsvReader csv;//データを読むクラスfのインスタンスを作成
-	bool ret = csv.Load("Assets/stage2.csv");
+	bool ret = csv.Load("Assets/stageT2.csv");
 	assert(ret);
 	width = csv.GetWidth(0);
 	height = csv.GetHeight();
@@ -77,7 +78,7 @@ void Field::Reset()
 			{
 			case 0://player
 			{
-				Player* pplayer = GetParent()->FindGameObject<Player>();
+				pplayer = GetParent()->FindGameObject<Player>();
 				pplayer->SetPosition(w * 32, h * 32);
 				pplayer->SetGround((h * 32) - 20);
 			}
@@ -145,8 +146,6 @@ void Field::Reset()
 			}
 		}
 	}
-	
-	
 }
 
 void Field::Update()
@@ -162,8 +161,6 @@ void Field::Draw()
 	for (int i = 0; i < Backnum; i++) {
 		DrawRectGraph((WIN_WIDTH * i) - scroll, 0, 0, 0, WIN_WIDTH, WIN_HEIGHT, background, TRUE);
 	}
-	DrawGraph(0, 0, stone, TRUE);
-	DrawGraph(0, 50, sousa, TRUE);
 
 	scroll = 0;
 	cam = GetParent()->FindGameObject<Camera>();
@@ -182,6 +179,9 @@ void Field::Draw()
 			DrawRectGraph((x*32)-scroll, y*32, 32*(chip % 16), 32*(chip / 16), 32,32, hImage, TRUE);
 		}
 	}
+
+	DrawGraph(0, 0, stone, TRUE);
+	DrawGraph(10,60, controll, TRUE);
 }
 
 void Field::Release()
@@ -251,102 +251,6 @@ void Field::IsScroll()
 	}
 }
 
-bool Field::IsCollisionRight(int i)
-{
-	Player* pPlayer = GetParent()->FindGameObject<Player>();
-	int Nx = pPlayer->GetPosition().x / 32;
-	int Ny = (pPlayer->GetPosition().y + i) / 32;
-	switch (Map[Ny * width + Nx + 2]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 610:
-	case 611:
-	case 612:
-	case 613:
-	case 614:
-		return true;
-	}
-	return false;
-}
-
-bool Field::IsCollisionLeft(int i)
-{
-	Player* pPlayer = GetParent()->FindGameObject<Player>();
-	int Nx = pPlayer->GetPosition().x / 32;
-	int Ny = (pPlayer->GetPosition().y + i) / 32;
-	switch (Map[Ny * width + Nx]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 610:
-	case 611:
-	case 612:
-	case 613:
-	case 614:
-		return true;
-	}
-	return false;
-}
-
-bool Field::IsCollisionUp(int i)
-{
-	Player* pPlayer = GetParent()->FindGameObject<Player>();
-	int Nx = (pPlayer->GetPosition().x + i) / 32;
-	int Ny = pPlayer->GetPosition().y / 32;
-	switch (Map[Ny * width + Nx]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 610:
-	case 611:
-	case 612:
-	case 613:
-	case 614:
-		return true;
-	}
-	return false;
-}
-
-bool Field::IsCollisionDown(int i)
-{
-	Player* pPlayer = GetParent()->FindGameObject<Player>();
-	int Nx = (pPlayer->GetPosition().x + i) / 32;
-	int Ny = (pPlayer->GetPosition().y + 88) / 32;
-	switch (Map[Ny * width + Nx]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 610:
-	case 611:
-	case 612:
-	case 613:
-	case 614:
-		return true;
-	}
-	return false;
-}
-
 bool Field::EnemyCollisionRight(int i)
 {
 	Enemy1* en1 = GetParent()->FindGameObject<Enemy1>();
@@ -393,28 +297,31 @@ void Field::ChangeChip(int x, int y,int changeNum)
 	Map[y * width + x] = changeNum;
 }
 
-
 bool Field::IsWallBlock(int x, int y)
 {
-	int chipX = x / 32;
-	int chipY = y / 32;
-	switch (Map[chipY * width + chipX])
+	Player* pplayer = GetParent()->FindGameObject<Player>();
+	if (pplayer != nullptr)
 	{
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-	case 610:
-	case 611:
-	case 612:
-	case 613:
-	case 614:
-		return true;
+		int chipX = x / 32;
+		int chipY = y / 32;
+		switch (Map[chipY * width + chipX])
+		{
+		case 16:
+		case 17:
+		case 18:
+		case 19:
+		case 32:
+		case 33:
+		case 34:
+		case 35:
+		case 610:
+		case 611:
+		case 612:
+		case 613:
+		case 614:
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 

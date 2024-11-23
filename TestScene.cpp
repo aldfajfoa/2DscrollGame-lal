@@ -88,12 +88,6 @@ void TestScene::UpdatePlay()
 {
 }
 
-//void TestScene::StartClear()
-//{
-//	readyTimer = 1.5f;
-//	state = S_Clear;
-//}
-
 void TestScene::UpdateClear()
 {
 }

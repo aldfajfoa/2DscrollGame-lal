@@ -11,6 +11,7 @@ public:
 	~Gool();
 	void Update() override;
 	void Draw() override;
+	int GetPositionX() { return transform_.position_.x; }
 
 	/// <summary>
 	/// 旗の座標をセットする
