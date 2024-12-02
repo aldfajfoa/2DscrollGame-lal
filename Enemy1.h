@@ -1,6 +1,10 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+/// <summary>
+/// ‹Ti“Gj
+/// </summary>
+/// 
 class Enemy1 : public GameObject
 {
 public:

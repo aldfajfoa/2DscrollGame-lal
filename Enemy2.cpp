@@ -1,11 +1,9 @@
 #include "Enemy2.h"
-#include <assert.h>
 #include "Camera.h"
 #include "TestScene.h"
 #include "Field.h"
 
 namespace {
-	static const int SCREEN_WIDTH = 1280;
 	const float GRAVITY = 9.8f / 60.0f;//重力加速度
 };
 
@@ -68,7 +66,7 @@ void Enemy2::Update()
 	if (!scene->CanMove())
 		return;
 
-	if (x > SCREEN_WIDTH) //即値、マジックナンバー
+	if (x > WIN_WIDTH) //即値、マジックナンバー
 		return;
 	else if (x < 0 - 64)
 	{
@@ -79,11 +77,6 @@ void Enemy2::Update()
 	sinAngle += 1.0f;//度
 	float sinValue = sinf(sinAngle * DX_PI_F / 180.0f);
 	transform_.position_.y = baseY + sinValue * 150;
-
-	//transform_.position_.x -= 0.5f;
-
-	//jumpSpeed += GRAVITY;//速度 += 加速度
-	//transform_.position_.y += jumpSpeed; //座標 += 速度
 
 	if (transform_.position_.y >= 700)
 	{
@@ -105,14 +98,9 @@ void Enemy2::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	/*Camera* cam = GetParent()->FindGameObject<Camera>();
-	if (cam != nullptr) {
-		x -= cam->GetValue();
-	}*/
+
 	Field* field = GetParent()->FindGameObject<Field>();
 	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * 64, 64, 64, hImage, TRUE);
-
-	//DrawCircle(x + 32.0f, y + 32.0f, 24.0f, GetColor(255, 0, 0),0);
 }
 
 void Enemy2::SetPosition(int x, int y)

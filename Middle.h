@@ -6,7 +6,7 @@ class Middle :
 {
 public:
 	Middle(GameObject* scene);
-	void Update() override;
+	~Middle();
 	void Draw() override;
 	void Release() override;
 	void SetPosition(int x, int y) { transform_.position_.x = x;

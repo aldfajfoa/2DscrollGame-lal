@@ -5,8 +5,6 @@ GameClear::GameClear(GameObject* parent)
 	:count(50)
 {
 	clear = LoadGraph("Assets/CLEAR_.png");
-	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	pSceneManager->SetisMiddle(false);
 }
 
 void GameClear::Update()
@@ -57,6 +55,6 @@ void GameClear::Release()
 {
 	if (clear > 0)
 	{
-		//InitGraph(clear);
+		DeleteGraph(clear);
 	}
 }

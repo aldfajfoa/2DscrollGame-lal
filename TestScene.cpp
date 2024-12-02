@@ -3,7 +3,6 @@
 #include "Enemy1.h"
 #include "Field.h"
 #include "Camera.h"
-#include "Banner.h"
 #include "LeverMaster.h"
 #include "Engine/SceneManager.h"
 
@@ -21,14 +20,15 @@ void TestScene::Initialize()
 	Instantiate<LeverMaster>(this);
 	Instantiate<Player>(this);
 	pField->Reset();
-	Instantiate<Banner>(this);
 
 	soundHandle = LoadSoundMem("Assets/Dream_diffuser.mp3");
 	PlaySoundMem(soundHandle, DX_PLAYTYPE_LOOP);
 	isSoundPlaying = true;
 
 	OverSound = LoadSoundMem("Assets/over.mp3");
-	StartReady();
+
+	readyTimer = 1.5f;
+	state = S_Ready;
 }
 
 //çXêV
@@ -38,15 +38,8 @@ void TestScene::Update()
 
 	switch (state) {
 	case S_Ready:UpdateReady(); break;
-	case S_Play:UpdatePlay(); break;
-	case S_Clear: UpdateClear(); break;
 	case S_Dead: UpdateDead(); break;
 	}
-}
-
-//ï`âÊ
-void TestScene::Draw()
-{
 }
 
 //äJï˙
@@ -63,12 +56,6 @@ bool TestScene::CanMove()
 	return (state == S_Play);
 }
 
-void TestScene::StartReady()
-{
-	readyTimer = 1.5f;
-	state = S_Ready;
-}
-
 void TestScene::UpdateReady()
 {
 	readyTimer -= 1.0f / 60.0f;
@@ -81,16 +68,6 @@ void TestScene::UpdateReady()
 void TestScene::StartPlay()
 {
 	state = S_Play;
-	//Banner* bn = FindGameObject<Banner>();
-	//bn->View(Banner::ViewID::V_Nothing);
-}
-
-void TestScene::UpdatePlay()
-{
-}
-
-void TestScene::UpdateClear()
-{
 }
 
 void TestScene::StartDead()

@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Banner.cpp" />
     <ClCompile Include="Enemy1.cpp" />
     <ClCompile Include="Engine\CsvReader.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
@@ -151,7 +150,6 @@
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Gool.cpp" />
-    <ClCompile Include="KanBan1.cpp" />
     <ClCompile Include="Enemy2.cpp" />
     <ClCompile Include="Lever.cpp" />
     <ClCompile Include="LeverBrock.cpp" />
@@ -164,10 +162,8 @@
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Banner.h" />
     <ClInclude Include="Enemy1.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Ease.h" />
     <ClInclude Include="Engine\CsvReader.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\Global.h" />
@@ -178,7 +174,6 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Gool.h" />
-    <ClInclude Include="KanBan1.h" />
     <ClInclude Include="Enemy2.h" />
     <ClInclude Include="Lever.h" />
     <ClInclude Include="LeverBrock.h" />

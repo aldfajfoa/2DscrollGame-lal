@@ -8,8 +8,10 @@ Middle::Middle(GameObject* scene)
 	assert(middle > 0);
 }
 
-void Middle::Update()
+Middle::~Middle()
 {
+	DeleteGraph(middle);
+	Release();
 }
 
 void Middle::Draw()
@@ -19,7 +21,6 @@ void Middle::Draw()
 
 	Field* field = GetParent()->FindGameObject<Field>();
 	DrawGraph(x - field->Getscroll(), y, middle, TRUE);
-	DrawCircle(x - field->Getscroll()+32, y+32, 20, TRUE);
 }
 
 void Middle::Release()

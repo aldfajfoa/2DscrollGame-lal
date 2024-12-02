@@ -6,7 +6,6 @@
 
 namespace
 {
-	static const int SCREEN_WIDTH = 1280;
 	static float t = 0;
 }
 
@@ -58,10 +57,6 @@ void SpeedStone::Update()
 		x -= cam->GetValue();
 	}
 
-	TestScene* scene = dynamic_cast<TestScene*>(GetParent());
-	if (!scene->CanMove())
-		return;
-
 	if (counter <= 0)
 	{
 		counter = 3;
@@ -72,14 +67,13 @@ void SpeedStone::Update()
 		}
 	}
 
-	if (x > SCREEN_WIDTH) //即値、マジックナンバー
+	if (x > WIN_WIDTH) //即値、マジックナンバー
 		return;
 	else if (x < 0 - 64)
 	{
 		KillMe();
 		return;
 	}
-
 
 	if (counter == 0)
 	{

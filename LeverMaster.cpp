@@ -25,10 +25,6 @@ void LeverMaster::Update()
 	int x = (int)transform_.position_.x - cam->GetValue();
 }
 
-void LeverMaster::Draw()
-{
-}
-
 void LeverMaster::Release()
 {
 }

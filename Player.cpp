@@ -10,7 +10,6 @@
 #include "TestScene.h"
 #include "LeverMaster.h"
 #include "Middle.h"
-#include "Engine/SceneManager.h"
 
 namespace {
 	const Size P_SIZE = { 80,88 };
@@ -185,6 +184,8 @@ void Player::Update()
 			readyTimer -= 1.0f / 60.0f;
 			if (readyTimer <= 0.0f)
 			{
+				SceneManager* pScene = (SceneManager*)GetParent()->GetParent();
+				pScene->SetisMiddle(false);
 				PlaySoundMem(ClearSound, DX_PLAYTYPE_BACK);
 				SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 				pSceneManager->ChangeScene(SCENE_ID_GAMECLEAR);
@@ -258,8 +259,6 @@ void Player::Draw()
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
 	DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, PlayerG, TRUE, ReversX);
-	DrawCircle(transform_.position_.x + (P_SIZE.w/2) - field->Getscroll(), transform_.position_.y + (P_SIZE.h / 2), 20.0f, 255,TRUE);
-	//DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, StoneLine, TRUE, ReversX);
 }
 
 void Player::Release()

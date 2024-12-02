@@ -17,7 +17,6 @@ public:
 	LeverMaster(GameObject* scene);
 	~LeverMaster();
 	void Update() override;
-	void Draw() override;
 	void Release() override;
 	void SetLeverPos(int num, int x, int y);
 	Camera* Getcam() { return cam; }

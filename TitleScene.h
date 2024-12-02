@@ -3,7 +3,10 @@
 class TitleScene :
     public GameObject
 {
+private:
 	int count;
+	int title;
+	XINPUT_STATE input;
 public:
 	//コンストラクタ
     //引数：parent  親オブジェクト（SceneManager）
@@ -11,11 +14,5 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-private:
-	int title;
-	int mori;
-	int moji1;
-	int moji2;
-	XINPUT_STATE input;
 };
 

@@ -1,5 +1,4 @@
 #include "Stone.h"
-#include <assert.h>
 #include "Camera.h"
 #include "Player.h"
 #include "Field.h"

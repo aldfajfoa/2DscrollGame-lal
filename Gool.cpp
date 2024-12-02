@@ -32,10 +32,6 @@ void Gool::Update()
 		x -= cam->GetValue();
 	}
 
-	TestScene* scene = dynamic_cast<TestScene*>(GetParent());
-	if (!scene->CanMove())
-		return;
-
 	if (x > SCREEN_WIDTH) //即値、マジックナンバー
 		return;
 	else if (x < 0 - 64)
@@ -66,14 +62,8 @@ void Gool::Draw()
 
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	/*cam = GetParent()->FindGameObject<Camera>();
-	if (cam != nullptr) {
-		x -= cam->GetValue();
-	}*/
-
+	
 	DrawGraph(x-field->Getscroll(), y, hImage, TRUE);
-
-	//DrawCircle(x + 100.0f, y + 100.0f, 200.0f, GetColor(255, 0, 0),0);
 }
 
 void Gool::SetPosition(int x, int y)

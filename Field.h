@@ -53,8 +53,6 @@ public:
 	bool GetLeftSc() { return LeftSc; }
 	bool GetRightSc() { return RightSc; }
 	
-	bool EnemyCollisionRight(int i);
-	bool EnemyCollisionLeft(int i);
 	void SetScroll(int scroll_) { scroll = scroll_; }
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }

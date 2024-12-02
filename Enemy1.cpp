@@ -1,12 +1,10 @@
 #include "Enemy1.h"
-#include <assert.h>
 #include "Camera.h"
 #include "TestScene.h"
 #include "Field.h"
 
 namespace 
 {
-	static const int SCREEN_WIDTH = 1280;
 	const float GRAVITY = 9.8f / 60.0f;//重力加速度
 	const Size E1_SIZE = { 64,64 };
 };
@@ -78,17 +76,13 @@ void Enemy1::Update()
 	if (!scene->CanMove())
 		return;
 
-	if (x > SCREEN_WIDTH) //即値、マジックナンバー
+	if (x > WIN_WIDTH)
 		return;
 	else if (x < 0 - 64) 
 	{
 		KillMe();
 		return;
 	}
-
-	//sinAngle += 0.4f;//度
-	//float sinValue = sinf(sinAngle * DX_PI_F / 180.0f);
-	//transform_.position_.x = baseY + sinValue * 150;
 
 	if (IsReverse) {
 		transform_.position_.x += 0.4f;
@@ -121,14 +115,9 @@ void Enemy1::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	/*Camera* cam = GetParent()->FindGameObject<Camera>();
-	if (cam != nullptr) {
-		x -= cam->GetValue();
-	}*/
+
 	Field* field = GetParent()->FindGameObject<Field>();
-	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * 64, 64, 64, hImage, TRUE, IsReverse);
-	
-	//DrawCircle(x + 32.0f, y + 32.0f, 24.0f, GetColor(255, 0, 0),0);
+	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * E1_SIZE.h, E1_SIZE.w, E1_SIZE.h, hImage, TRUE, IsReverse);
 }
 
 bool Enemy1::CollideCircle(float x, float y, float r)

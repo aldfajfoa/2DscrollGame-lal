@@ -70,16 +70,10 @@
     <ClCompile Include="Enemy2.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Banner.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
     <ClCompile Include="Field.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Gool.cpp">
-      <Filter>Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="KanBan1.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="Lever.cpp">
@@ -144,19 +138,10 @@
     <ClInclude Include="Camera.h">
       <Filter>Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Banner.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Ease.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Field.h">
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Gool.h">
-      <Filter>Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="KanBan1.h">
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="Lever.h">

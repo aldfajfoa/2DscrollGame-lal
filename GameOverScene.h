@@ -3,7 +3,11 @@
 class GameOverScene :
     public GameObject
 {
+private:
 	int count;
+	int over;
+	int counter;
+	XINPUT_STATE input;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
@@ -11,11 +15,5 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-private:
-	int over;
-	int s;
-	int q;
-	int counter;
-	XINPUT_STATE input;
 };
 

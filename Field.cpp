@@ -1,11 +1,9 @@
 #include "Field.h"
-#include <assert.h>
 #include "Camera.h"
 #include "Player.h"
 #include "Enemy1.h"
 #include "Enemy2.h"
 #include "Gool.h"
-#include "KanBan1.h"
 #include "Stone.h"
 #include "LeverMaster.h"
 #include "SpeedStone.h"
@@ -56,7 +54,7 @@ void Field::Reset()
 	}
 
 	CsvReader csv;//データを読むクラスfのインスタンスを作成
-	bool ret = csv.Load("Assets/stage1.csv");
+	bool ret = csv.Load("Assets/stageT2.csv");
 	assert(ret);
 	width = csv.GetWidth(0);
 	height = csv.GetHeight();
@@ -91,13 +89,13 @@ void Field::Reset()
 				pplayer->SetGround((h * 32) - 20);
 			}
 			break;
-			case 1://bird
+			case 1://亀
 			{
 				Enemy1* pEne1 = Instantiate<Enemy1>(GetParent());
 				pEne1->SetPosition(w * 32, h * 32);
 			}
 			break;
-			case 2://Livingthings
+			case 2://鳥
 			{
 				Enemy2* pEne2 = Instantiate<Enemy2>(GetParent());
 				pEne2->SetPosition(w * 32, h * 32);
@@ -111,8 +109,6 @@ void Field::Reset()
 			break;
 			case 4:
 			{
-				KanBan1* k1 = Instantiate<KanBan1>(GetParent());
-				k1->SetPosition(w * 32, h * 32);
 			}
 			break;
 			case 5://SpeedStone
@@ -270,44 +266,6 @@ void Field::IsScroll()
 	else {
 		RightSc = true;
 	}
-}
-
-bool Field::EnemyCollisionRight(int i)
-{
-	Enemy1* en1 = GetParent()->FindGameObject<Enemy1>();
-	int Nx = en1->GetPosition().x / 32;
-	int Ny = (en1->GetPosition().y + i) / 32;
-	switch (Map[Ny * width + Nx + 2]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-		return true;
-	}
-	return false;
-}
-
-bool Field::EnemyCollisionLeft(int i)
-{
-	Enemy1* en1 = GetParent()->FindGameObject<Enemy1>();
-	int Nx = en1->GetPosition().x / 32;
-	int Ny = (en1->GetPosition().y + i) / 32;
-	switch (Map[Ny * width + Nx]) {
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 32:
-	case 33:
-	case 34:
-	case 35:
-		return true;
-	}
-	return false;
 }
 
 void Field::ChangeChip(int x, int y,int changeNum)
