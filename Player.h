@@ -52,9 +52,11 @@ private:
 	 };
 	State state;
 
+	int i;
+
     int PlayerG;
 	int kazu;
-	int soundHandle;   // 音声のハンドル
+	int StonesoundHandle;   // 音声のハンドル
 	bool prevSpaceKey;
 	float jumpSpeed;
 	bool onGround;
@@ -72,5 +74,8 @@ private:
 	bool firstGround;
 	bool isAlive;
 	float p_speed;
-	int StoneLine = LoadGraph("Assets/Yosokusen.png");
+	int StoneLine;
+	int WalkHandle;//歩く効果音
+	bool WalkFlag;//上記の音の音声再生中かを確認するフラグ
+	int ClearSound;
 };

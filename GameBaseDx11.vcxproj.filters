@@ -94,6 +94,9 @@
     <ClCompile Include="LeverMaster.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Middle.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameObject.h">
@@ -166,6 +169,9 @@
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="LeverMaster.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Middle.h">
       <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>

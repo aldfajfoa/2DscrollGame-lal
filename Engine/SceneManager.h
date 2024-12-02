@@ -31,8 +31,11 @@ public:
 	//引数：next	次のシーンのID
 	void ChangeScene(SCENE_ID next);
 
+	void SetisMiddle(bool is) { isMiddle = is; }
+	bool GetisMiddle() { return isMiddle; }
 private:
 	SCENE_ID currentSceneID_;	//現在のシーン
 	SCENE_ID nextSceneID_;		//次のシーン
 
+	bool isMiddle;//中間にスポーンするかどうか
 };

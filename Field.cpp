@@ -10,6 +10,9 @@
 #include "LeverMaster.h"
 #include "SpeedStone.h"
 #include "Engine/CsvReader.h"
+#include "TestScene.h"
+#include "Middle.h"
+#include "Engine/SceneManager.h"
 
 Field::Field(GameObject* scene)
 	:GameObject(scene,"Field")
@@ -23,6 +26,7 @@ Field::Field(GameObject* scene)
 	assert(controll > 0);
 	Map = nullptr;
 	scroll = 0;
+	SM = (SceneManager*)GetParent()->GetParent();
 }
 
 Field::~Field()
@@ -30,12 +34,12 @@ Field::~Field()
 	if (hImage > 0)
 	{
 		DeleteGraph(hImage);
-		InitGraph(hImage);
-		InitGraph(background);
-		InitGraph(stone);
-		InitGraph(controll);
+		DeleteGraph(stone);
+		DeleteGraph(background);
+		DeleteGraph(controll);
 	}
-	if (Map != nullptr) {
+	if (Map != nullptr) 
+	{
 		delete[] Map; //Mapは配列
 	}
 
@@ -44,12 +48,15 @@ Field::~Field()
 
 void Field::Reset()
 {
-	if (Map != nullptr) {
+
+	if (Map != nullptr) 
+	{
 		delete[] Map;
 		Map = nullptr;
 	}
+
 	CsvReader csv;//データを読むクラスfのインスタンスを作成
-	bool ret = csv.Load("Assets/stageT2.csv");
+	bool ret = csv.Load("Assets/stage1.csv");
 	assert(ret);
 	width = csv.GetWidth(0);
 	height = csv.GetHeight();
@@ -63,6 +70,7 @@ void Field::Reset()
 			height = h;
 			break;
 		}
+
 		for (int w = 0; w < width; w++)
 		{
 			Map[h * width + w] = csv.GetInt(w, h);
@@ -123,8 +131,21 @@ void Field::Reset()
 				leMas->SetLeverPos(csv.GetInt(w, h + height + 1), w * 32, h * 32);
 			}
 			break;
+			case 7://Middle(中間地点)
+			{
+				Middle* mi = Instantiate<Middle>(GetParent());
+				mi->SetPosition(w * 32, h * 32);
+				middlePosX = w * 32;
+				middlePosY = h * 32;
+			}
+			break;
 			}
 		}
+	}
+
+	if (SM->GetisMiddle()) {
+		pplayer->SetPosition(middlePosX, middlePosY);
+		pplayer->SetGround(middlePosY - 20);
 	}
 
 	for (int h = 0; h < height; h++)

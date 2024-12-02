@@ -64,6 +64,7 @@ void Lever::Draw()
 
 void Lever::Release()
 {
+	DeleteGraph(hImage);
 }
 
 void Lever::SetPosition(int x, int y)

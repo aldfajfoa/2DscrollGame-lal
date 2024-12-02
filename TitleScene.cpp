@@ -5,7 +5,7 @@
 TitleScene::TitleScene(GameObject* parent)
 	:GameObject(parent, "TitleScene"), count(20)
 {
-	title = LoadGraph("Assets/Title.png");
+	title = LoadGraph("Assets/Title1.png");
 	mori = LoadGraph("Assets/mori1.jpg");
 	moji1 = LoadGraph("Assets/Start.png");
 	moji2 = LoadGraph("Assets/exit.png");
@@ -47,10 +47,10 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	DrawGraph(0, 0, mori, TRUE);
-	DrawGraph(100, 200, title, TRUE);
-	DrawGraph(200, 400, moji1, TRUE);
-	DrawGraph(200, 500, moji2, TRUE);
+	//DrawGraph(0, 0, mori, TRUE);
+	DrawGraph(0, 0, title, TRUE);
+	//DrawGraph(200, 400, moji1, TRUE);
+	//DrawGraph(200, 500, moji2, TRUE);
 }
 
 void TitleScene::Release()

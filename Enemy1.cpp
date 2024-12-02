@@ -4,7 +4,8 @@
 #include "TestScene.h"
 #include "Field.h"
 
-namespace {
+namespace 
+{
 	static const int SCREEN_WIDTH = 1280;
 	const float GRAVITY = 9.8f / 60.0f;//èdóÕâ¡ë¨ìx
 	const Size E1_SIZE = { 64,64 };

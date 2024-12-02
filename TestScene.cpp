@@ -27,6 +27,7 @@ void TestScene::Initialize()
 	PlaySoundMem(soundHandle, DX_PLAYTYPE_LOOP);
 	isSoundPlaying = true;
 
+	OverSound = LoadSoundMem("Assets/over.mp3");
 	StartReady();
 }
 
@@ -103,6 +104,7 @@ void TestScene::UpdateDead()
 	readyTimer -= 1.0f / 60.0f;
 	if (readyTimer <= 0.0f)
 	{
+		PlaySoundMem(OverSound, DX_PLAYTYPE_BACK);
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		Release();
 		pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);

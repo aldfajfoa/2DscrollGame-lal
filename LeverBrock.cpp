@@ -41,4 +41,5 @@ void LeverBrock::Draw()
 
 void LeverBrock::Release()
 {
+	DeleteGraph(hImage);
 }

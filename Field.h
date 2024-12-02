@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 class Camera;
 class Player;
+class SceneManager;
 
 /// <summary>
 /// 地面（プレイフィールド）
@@ -63,9 +64,12 @@ private:
 	const int CH_SIZE = 32;//マップチップサイズ
 	Camera* cam;
 	Player* pplayer;
+	SceneManager* SM;
 	int hImage;
 	int background;
 	int stone;
+	float middlePosX;
+	float middlePosY;
 	
 	bool IsWallBlock(int x, int y);
 	int* Map;

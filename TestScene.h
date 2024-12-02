@@ -30,6 +30,8 @@ private:
 	bool isSoundPlaying;  // 音声再生中かを確認するフラグ
 	int soundHandle;      // 音声のハンドル
 
+	int OverSound;//ゲームオーバーのハンドル
+
 	XINPUT_STATE input;   // コントローラーの入力状態
 
 	// ステートの切り替えと更新処理
