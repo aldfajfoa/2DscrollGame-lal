@@ -1,12 +1,11 @@
 #include "Gool.h"
-#include <assert.h>
 #include "Camera.h"
 #include "TestScene.h"
 #include "Field.h"
 
 namespace
 {
-	static const int SCREEN_WIDTH = 1280;
+	const Size G_SIZE = {128,256};
 }
 
 Gool::Gool(GameObject* scene)
@@ -27,20 +26,16 @@ Gool::~Gool()
 void Gool::Update()
 {
 	int x = (int)transform_.position_.x;
-	cam = GetParent()->FindGameObject<Camera>();
-	if (cam != nullptr) {
-		x -= cam->GetValue();
-	}
 
-	if (x > SCREEN_WIDTH) //即値、マジックナンバー
+	if (x > WIN_WIDTH) //即値、マジックナンバー
 		return;
-	else if (x < 0 - 64)
+	else if (x < 0 -G_SIZE.w)
 	{
 		KillMe();
 		return;
 	}
 
-	if (transform_.position_.y >= 700)
+	if (transform_.position_.y >= WIN_HEIGHT)
 	{
 		KillMe();
 	}

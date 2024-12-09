@@ -35,6 +35,43 @@ void Stone::Update()
 
 	pField = GetParent()->FindGameObject<Field>();
 
+	ControlCollision();
+
+	jumpSpeed += GRAVITY;
+	transform_.position_.y += jumpSpeed;
+
+
+	if (--timer <= 0)
+	{
+		IsReverse = true;
+		Release();
+		KillMe();
+	}
+
+	if (CheckHitKey(KEY_INPUT_R))
+	{
+		Reset();
+	}
+
+	WarpStone();//プレイヤーを石の位置に移動させる
+}
+
+void Stone::Draw()
+{
+	int x = (int)transform_.position_.x;
+	int y = (int)transform_.position_.y;
+
+	DrawGraph(x-pField->Getscroll(), y, StoneG, TRUE);
+}
+
+void Stone::SetPosition(XMFLOAT3 pos)
+{
+	transform_.position_ = pos;
+	timer = 150;
+}
+
+void Stone::ControlCollision()
+{
 	int push = pField->CollisionRight(transform_.position_.x + 20, transform_.position_.y + 15);
 
 	if (push > 1)
@@ -119,45 +156,10 @@ void Stone::Update()
 		}
 	}
 
-	if (colL || colR || colU || colD) {
+	if (colL || colR || colU || colD)//当たったら速度を0にする 
+	{
 		MoveSpeed = 0;
 	}
-
-	jumpSpeed += GRAVITY;
-	transform_.position_.y += jumpSpeed;
-
-
-	if (--timer <= 0)
-	{
-		IsReverse = true;
-		Release();
-		KillMe();
-	}
-
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-	}
-
-	WarpStone();//プレイヤーを石の位置に移動させる
-}
-
-void Stone::Draw()
-{
-	int x = (int)transform_.position_.x;
-	int y = (int)transform_.position_.y;
-
-	/*Camera* cam = GetParent()->FindGameObject<Camera>();
-	if (cam != nullptr) {
-		//x -= cam->GetValue();
-	}*/
-	DrawGraph(x-pField->Getscroll(), y, StoneG, TRUE);
-}
-
-void Stone::SetPosition(XMFLOAT3 pos)
-{
-	transform_.position_ = pos;
-	timer = 150;
 }
 
 void Stone::Reset()

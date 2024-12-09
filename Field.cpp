@@ -7,9 +7,8 @@
 #include "Stone.h"
 #include "LeverMaster.h"
 #include "SpeedStone.h"
-#include "Engine/CsvReader.h"
-#include "TestScene.h"
 #include "Middle.h"
+#include "Engine/CsvReader.h"
 #include "Engine/SceneManager.h"
 
 Field::Field(GameObject* scene)
@@ -21,6 +20,7 @@ Field::Field(GameObject* scene)
 	controll = LoadGraph("Assets/Controll.png");
 	assert(hImage > 0);
 	assert(background > 0);
+	assert(stone > 0);
 	assert(controll > 0);
 	Map = nullptr;
 	scroll = 0;
@@ -46,14 +46,13 @@ Field::~Field()
 
 void Field::Reset()
 {
-
-	if (Map != nullptr) 
+	if (Map != nullptr)//Mapが空じゃなかったらdelete 
 	{
 		delete[] Map;
 		Map = nullptr;
 	}
 
-	CsvReader csv;//データを読むクラスfのインスタンスを作成
+	CsvReader csv;//データを読むクラスのインスタンスを作成
 	bool ret = csv.Load("Assets/stageT2.csv");
 	assert(ret);
 	width = csv.GetWidth(0);
@@ -82,41 +81,42 @@ void Field::Reset()
 		{
 			switch (csv.GetInt(w,h+height+1))
 			{
-			case 0://player
+			case 0://プレイヤー
 			{
 				pplayer = GetParent()->FindGameObject<Player>();
-				pplayer->SetPosition(w * 32, h * 32);
-				pplayer->SetGround((h * 32) - 20);
+				pplayer->SetPosition(w * CH_SIZE, h * CH_SIZE);
+				pplayer->SetGround((h * CH_SIZE) - 20);
 			}
 			break;
 			case 1://亀
 			{
 				Enemy1* pEne1 = Instantiate<Enemy1>(GetParent());
-				pEne1->SetPosition(w * 32, h * 32);
+				pEne1->SetPosition(w * CH_SIZE, h * CH_SIZE);
 			}
 			break;
 			case 2://鳥
 			{
 				Enemy2* pEne2 = Instantiate<Enemy2>(GetParent());
-				pEne2->SetPosition(w * 32, h * 32);
+				pEne2->SetPosition(w * CH_SIZE, h * CH_SIZE);
 			}
 			break;
-			case 3://Gool
+			case 3://ゴール
 			{
 				Gool* Gools = Instantiate<Gool>(GetParent());
-				Gools->SetPosition(w * 32, h * 32);
+				Gools->SetPosition(w * CH_SIZE, h * CH_SIZE);
 			}
 			break;
 			case 4:
 			{
 			}
 			break;
-			case 5://SpeedStone
+			case 5://スピードストーン(取ると移動速度UP)
 			{
 				SpeedStone* Ss = Instantiate<SpeedStone>(GetParent());
-				Ss->SetPosition(w * 32, h * 32);
+				Ss->SetPosition(w * CH_SIZE, h * CH_SIZE);
 			}
 			break;
+			//レバー
 			case 600:
 			case 601:
 			case 602:
@@ -124,15 +124,15 @@ void Field::Reset()
 			case 604:
 			{
 				LeverMaster* leMas = GetParent()->FindGameObject<LeverMaster>();
-				leMas->SetLeverPos(csv.GetInt(w, h + height + 1), w * 32, h * 32);
+				leMas->SetLeverPos(csv.GetInt(w, h + height + 1), w * CH_SIZE, h * CH_SIZE);
 			}
 			break;
 			case 7://Middle(中間地点)
 			{
 				Middle* mi = Instantiate<Middle>(GetParent());
-				mi->SetPosition(w * 32, h * 32);
-				middlePosX = w * 32;
-				middlePosY = h * 32;
+				mi->SetPosition(w * CH_SIZE, h * CH_SIZE);
+				middlePosX = w * CH_SIZE;
+				middlePosY = h * CH_SIZE;
 			}
 			break;
 			}
@@ -157,7 +157,7 @@ void Field::Reset()
 			case 614:
 			{
 				LeverMaster* lbMas = GetParent()->FindGameObject<LeverMaster>();
-				lbMas->birthLeverBrock(w * 32, h * 32, (csv.GetInt(w, h)) - 610);
+				lbMas->birthLeverBrock(w * CH_SIZE, h * CH_SIZE, (csv.GetInt(w, h)) - 610);
 			}
 			break;
 			}
@@ -193,7 +193,7 @@ void Field::Draw()
 		for (int x = 0; x < width; x++) 
 		{
 			int chip = Map[y*width+x];
-			DrawRectGraph((x*32)-scroll, y*32, 32*(chip % 16), 32*(chip / 16), 32,32, hImage, TRUE);
+			DrawRectGraph((x* CH_SIZE)-scroll, y* CH_SIZE, CH_SIZE *(chip % 16), CH_SIZE *(chip / 16), CH_SIZE, CH_SIZE, hImage, TRUE);
 		}
 	}
 
@@ -210,7 +210,7 @@ int Field::CollisionRight(int x, int y)
 	if (IsWallBlock(x, y))
 	{
 		//当たっているので、めり込んだ量を返す
-		return x % 32 + 1;
+		return x % CH_SIZE + 1;
 	}
 	else
 		return 0;
@@ -221,7 +221,7 @@ int Field::CollisionLeft(int x, int y)
 	if (IsWallBlock(x, y)) 
 	{
 		//当たっているので、めり込んだ量を返す
-		return x % 32 - 1;
+		return x % CH_SIZE - 1;
 	}
 	else
 		return 0;
@@ -232,7 +232,7 @@ int Field::CollisionDown(int x, int y)
 	if (IsWallBlock(x, y)) 
 	{
 		//当たっているので、めり込んだ量を返す
-		return y % 32 + 1;
+		return y % CH_SIZE + 1;
 	}
 	else
 		return 0;
@@ -243,7 +243,7 @@ int Field::CollisionUp(int x, int y)
 	if (IsWallBlock(x, y)) 
 	{
 		//当たっているので、めり込んだ量を返す
-		return y % 32 + 1;
+		return y % CH_SIZE + 1;
 	}
 	else
 		return 0;
@@ -259,8 +259,8 @@ void Field::IsScroll()
 		LeftSc = true;
 	}
 
-	if (scroll >= width * 32 - WIN_WIDTH) {
-		scroll = width * 32 - WIN_WIDTH;
+	if (scroll >= width * CH_SIZE - WIN_WIDTH) {
+		scroll = width * CH_SIZE - WIN_WIDTH;
 		RightSc = false;
 	}
 	else {
@@ -281,8 +281,8 @@ bool Field::IsWallBlock(int x, int y)
 	Player* pplayer = GetParent()->FindGameObject<Player>();
 	if (pplayer != nullptr)
 	{
-		int chipX = x / 32;
-		int chipY = y / 32;
+		int chipX = x / CH_SIZE;
+		int chipY = y / CH_SIZE;
 		switch (Map[chipY * width + chipX])
 		{
 		case 16:

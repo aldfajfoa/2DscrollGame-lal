@@ -3,6 +3,9 @@
 class GameClear :
     public GameObject
 {
+private:
+	int clear;
+	XINPUT_STATE input;
 	int count;
 public:
 	//コンストラクタ
@@ -11,7 +14,4 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-private:
-	int clear;
-	XINPUT_STATE input;
 };

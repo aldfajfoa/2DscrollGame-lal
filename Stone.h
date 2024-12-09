@@ -3,9 +3,7 @@
 class Player;
 class Field;
 
-/// <summary>
-/// プレイヤーが投げる石
-/// </summary>
+//プレイヤーが投げる石
 class Stone : public GameObject
 {
 public:
@@ -14,6 +12,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void SetPosition(XMFLOAT3 pos);
+	void ControlCollision();//当たり判定
 	void Reset();
 
 private:
