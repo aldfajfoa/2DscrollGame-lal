@@ -23,29 +23,25 @@ namespace {
 
 Player::Player(GameObject* parent) 
 	: GameObject(sceneTop), cam(nullptr), field(nullptr), lMas(nullptr), 
-	  counter(0), count(0), rcount(0), firstGround(true)
+	  counter(0), count(0),animType(0), animFrame(0), frameCounter(0), firstGround(true)
 {
 	PlayerG = LoadGraph("Assets/player2.png");
 	kazu = LoadGraph("Assets/suji.png");
 	assert(PlayerG > 0);
+	assert(kazu > 0);
+
 	transform_.position_.x = 10.0f;
 	transform_.position_.y = GROUND;
 	jumpSpeed = 0.0f;
 	onGround = true;
 	isAlive = true;
-	animType = 0;
-	animFrame = 0;
-	frameCounter = 0;
-	state = S_Walk;
-	transparency = 0;
 	readyTimer = 1.5f;
 	p_speed = MOVE_SPEED;
-	StonesoundHandle = LoadSoundMem("Assets/Î“Š‚°‚é.mp3");
-	StoneLine = LoadGraph("Assets/Yosokusen.png");
-	WalkHandle = LoadSoundMem("Assets/WalkSound.mp3");
-	WalkFlag = false;
+	STONE_NUMBER = 940;
+
 	ClearSound = LoadSoundMem("Assets/Clear.mp3");
-	Reset();
+	StonesoundHandle = LoadSoundMem("Assets/Î“Š‚°‚é.mp3");
+	WalkHandle = LoadSoundMem("Assets/WalkSound.mp3");
 }
 
 
@@ -60,8 +56,7 @@ Player::~Player()
 
 void Player::Update()
 {
-	//“ü—Íó‘Ô‚ğæ“¾
-	GetJoypadXInputState(DX_INPUT_PAD1, &input);
+	GetJoypadXInputState(DX_INPUT_PAD1, &input);//“ü—Íó‘Ô‚ğæ“¾
 	tmpPosx = transform_.position_.x;
 	tmpPosy = transform_.position_.y;
 
@@ -102,10 +97,7 @@ void Player::Update()
 	}
 
 	//Î‚ğ“Š‚°‚é
-	if (count == MAX_STONE)
-	{
-	}
-	else
+	if (count < MAX_STONE)
 	{
 		if (CheckHitKey(KEY_INPUT_O))
 		{
@@ -230,17 +222,6 @@ void Player::Update()
 		KillMe();
 	}
 
-	//ƒŠƒZƒbƒg
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, transparency);
-	}
-	else
-	{
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, transparency + 500);
-	}
-
 	if (transform_.position_.x <= 0)
 	{
 		transform_.position_.x = 0;
@@ -258,7 +239,7 @@ void Player::Draw()
 
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, 80, 88, PlayerG, TRUE, ReversX);
+	DrawRectGraph(x - field->Getscroll(), y, animFrame * P_SIZE.w, P_SIZE.h * 2, P_SIZE.w, P_SIZE.h, PlayerG, TRUE, ReversX);
 }
 
 void Player::Release()
@@ -270,13 +251,6 @@ void Player::SetPosition(int x, int y)
 {
 	transform_.position_.x = x;
 	transform_.position_.y = y;
-}
-
-void Player::Reset()
-{
-	count = 0;
-	STONE_NUMBER = 940;
-	DrawRectGraph(170, 0, 0, STONE_NUMBER, 64, 64, kazu, TRUE);
 }
 
 void Player::ControlCollision()

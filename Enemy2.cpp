@@ -5,18 +5,15 @@
 
 namespace {
 	const float GRAVITY = 9.8f / 60.0f;//重力加速度
+	const Size E2_SIZE = { 64,64 };
 };
 
-Enemy2::Enemy2(GameObject* scene)
+Enemy2::Enemy2(GameObject* scene):counter(0), animType(0), animFrame(0), frameCounter(0)
 {
 	hImage = LoadGraph("Assets/mob.png");
 	assert(hImage > 0);
 	transform_.position_.x = 800.0f;
 	transform_.position_.y = 500.0f;
-	counter = 0;
-	animType = 0;
-	animFrame = 0;
-	frameCounter = 0;
 }
 
 Enemy2::~Enemy2()
@@ -68,7 +65,7 @@ void Enemy2::Update()
 
 	if (x > WIN_WIDTH) //即値、マジックナンバー
 		return;
-	else if (x < 0 - 64)
+	else if (x < 0 - E2_SIZE.w)
 	{
 		KillMe();
 		return;
@@ -87,11 +84,6 @@ void Enemy2::Update()
 	{
 		counter = 160;
 	}
-
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-	}
 }
 
 void Enemy2::Draw()
@@ -100,7 +92,7 @@ void Enemy2::Draw()
 	int y = (int)transform_.position_.y;
 
 	Field* field = GetParent()->FindGameObject<Field>();
-	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * 64, 64, 64, hImage, TRUE);
+	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * E2_SIZE.h, E2_SIZE.w, E2_SIZE.h, hImage, TRUE);
 }
 
 void Enemy2::SetPosition(int x, int y)
@@ -122,9 +114,4 @@ bool Enemy2::CollideCircle(float x, float y, float r)
 	if ((dx * dx + dy * dy) < (r + myR) * (r + myR))
 		return true;
 	return false;
-}
-
-void Enemy2::Reset()
-{
-	KillMe();
 }

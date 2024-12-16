@@ -40,11 +40,6 @@ void SceneManager::Update()
 	}
 }
 
-//•`‰æ
-void SceneManager::Draw()
-{
-}
-
 //ŠJ•ú
 void SceneManager::Release()
 {

@@ -4,7 +4,7 @@
 /// <summary>
 /// ‹Ti“Gj
 /// </summary>
-/// 
+
 class Enemy1 : public GameObject
 {
 public:
@@ -23,7 +23,7 @@ public:
 	//‰~‚Ì“–‚½‚è”»’è‚ğ‚·‚é
 	bool CollideCircle(float x, float y, float r);
 
-	void Reset();
+	//“G‚ÌŒü‚«‚ğ”½“]‚³‚¹‚é
 	void ReverseEnemy();
 private:
 	bool prevSpaceKey;

@@ -15,7 +15,7 @@ public:
 	void Draw() override;
 
 	/// <summary>
-	/// 生き物の座標をセットする
+	/// 座標をセットする
 	/// </summary>
 	/// <param name="x">X座標</param>
 	/// <param name="y">Y座標</param>
@@ -23,8 +23,6 @@ public:
 
 	//円の当たり判定をする
 	bool CollideCircle(float x, float y, float r);
-
-	void Reset();
 private:
 	bool prevSpaceKey;
 	float jumpSpeed;

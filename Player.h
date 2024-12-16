@@ -24,7 +24,6 @@ public:
 	/// <param name="y">Y座標</param>
 	void SetPosition(int x, int y);
 	int GetPositionX() { return transform_.position_.x; }
-	void Reset();
 	bool GetReversX() { return ReversX; }
 	void ControlCollision();
 	void SetGround(float _ground) { Ground = _ground; }
@@ -46,26 +45,16 @@ private:
 	Camera* cam;
 	Field* field;
 	LeverMaster* lMas;
-     enum State 
-	 {
-		S_Walk=0,
-	 };
-	State state;
-
-	int i;
 
     int PlayerG;
 	int kazu;
-	int StonesoundHandle;   // 音声のハンドル
 	bool prevSpaceKey;
 	float jumpSpeed;
 	bool onGround;
 	int counter;
-	int rcount;
 	int animType; //状況
 	int animFrame;//コマ
 	int frameCounter;
-	float transparency;//透明度
 	float readyTimer;
 	bool ReversX;
 	int tmpPosx,tmpPosy;
@@ -74,8 +63,8 @@ private:
 	bool firstGround;
 	bool isAlive;
 	float p_speed;
-	int StoneLine;
+
+	int StonesoundHandle;// 音声のハンドル
 	int WalkHandle;//歩く効果音
-	bool WalkFlag;//上記の音の音声再生中かを確認するフラグ
 	int ClearSound;
 };

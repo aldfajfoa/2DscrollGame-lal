@@ -9,17 +9,12 @@ namespace
 	const Size E1_SIZE = { 64,64 };
 };
 
-Enemy1::Enemy1(GameObject* scene)
+Enemy1::Enemy1(GameObject* scene):counter(0), animType(0), animFrame(0), frameCounter(0), IsReverse(false)
 {
 	hImage = LoadGraph("Assets/mob2.png");
 	assert(hImage > 0);
 	transform_.position_.x = 800.0f;
 	transform_.position_.y = 500.0f;
-	counter = 0;
-	animType = 0;
-	animFrame = 0;
-	frameCounter = 0;
-	IsReverse = false;
 }
 
 Enemy1::~Enemy1()
@@ -50,7 +45,6 @@ void Enemy1::Update()
 
 	if (pField != nullptr)
 	{
-		//(50,64)‚Æ(14,64)‚àŒ©‚é
 		int pushR = pField->CollisionDown(transform_.position_.x + 50, transform_.position_.y + 60);
 		int pushL = pField->CollisionDown(transform_.position_.x + 14, transform_.position_.y + 60);
 		int push = max(pushR, pushL);//‚Q‚Â‚Ì‘«Œ³‚Ì‚ß‚èž‚Ý‚Ì‘å‚«‚¢•û
@@ -78,7 +72,7 @@ void Enemy1::Update()
 
 	if (x > WIN_WIDTH)
 		return;
-	else if (x < 0 - 64) 
+	else if (x < 0 - E1_SIZE.w) 
 	{
 		KillMe();
 		return;
@@ -104,11 +98,6 @@ void Enemy1::Update()
 	{
 		counter = 160;
 	}
-
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-	}
 }
 
 void Enemy1::Draw()
@@ -132,11 +121,6 @@ bool Enemy1::CollideCircle(float x, float y, float r)
 	if ((dx * dx + dy * dy) < (r + myR) * (r + myR))
 		return true;
 	return false;
-}
-
-void Enemy1::Reset()
-{
-	KillMe();
 }
 
 void Enemy1::ReverseEnemy()

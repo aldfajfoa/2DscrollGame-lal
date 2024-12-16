@@ -53,7 +53,7 @@ void Field::Reset()
 	}
 
 	CsvReader csv;//データを読むクラスのインスタンスを作成
-	bool ret = csv.Load("Assets/stageT2.csv");
+	bool ret = csv.Load("Assets/stage2.csv");
 	assert(ret);
 	width = csv.GetWidth(0);
 	height = csv.GetHeight();

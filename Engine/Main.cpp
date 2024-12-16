@@ -1,8 +1,3 @@
-/// <summary>
-/// DxLib ‚ğ“ü‚ê‚½ƒo[ƒWƒ‡ƒ“
-///  2023/12/6 ‰Ôˆä
-/// </summary>
-
 #include "global.h"
 #include "RootObject.h"
 

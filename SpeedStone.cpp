@@ -9,30 +9,12 @@ namespace
 	static float t = 0;
 }
 
-SpeedStone::SpeedStone()
+SpeedStone::SpeedStone(GameObject* parent) :counter(0), animType(0), animFrame(0), frameCounter(0), isAlive(true)
 {
 	SpeedStoneG = LoadGraph("Assets/houseki.png");
 	assert(SpeedStoneG > 0);
 	transform_.position_.x = 800.0f;
 	transform_.position_.y = 650.0f;
-	animType = 0;
-	animFrame = 0;
-	frameCounter = 0;
-	counter = 0;
-	isAlive = true;
-}
-
-SpeedStone::SpeedStone(GameObject parent)
-{
-	SpeedStoneG = LoadGraph("Assets/houseki.png");
-	assert(SpeedStoneG > 0);
-	transform_.position_.x = 800.0f;
-	transform_.position_.y = 650.0f;
-	animType = 0;
-	animFrame = 0;
-	frameCounter = 0;
-	counter = 0;
-	isAlive = true;
 }
 
 SpeedStone::~SpeedStone()
@@ -80,11 +62,6 @@ void SpeedStone::Update()
 		counter = 160;
 	}
 
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-	}
-
 	if (isAlive == false)
 	{
 		KillStone();
@@ -122,11 +99,6 @@ bool SpeedStone::CollideCircle(float x, float y, float r)
 	if ((dx * dx + dy * dy) < (r + myR) * (r + myR))
 		return true;
 	return false;
-}
-
-void SpeedStone::Reset()
-{
-	KillMe();
 }
 
 void SpeedStone::KillStone()

@@ -6,8 +6,7 @@ class SpeedStone :
     public GameObject
 {
 public:
-    SpeedStone();
-    SpeedStone(GameObject parent);
+    SpeedStone(GameObject* parent);
     ~SpeedStone();
     void Initialize()override;
     void Update() override;
@@ -20,14 +19,11 @@ public:
     /// <param name="y">Y座標</param>
     void SetPosition(int x, int y);
 
-
     bool CollideCircle(float x, float y, float r);
 
-    void Reset();
-
-    bool IsAlive() { return isAlive; }          //スピードストーンは生きとるんか？
-    void DeActivateMe() { isAlive = false; }    //スピードストーンが死んだ
-    void ActivateMe() { isAlive = true; }       //スピードストーンがまだ生きてる
+    bool IsAlive() { return isAlive; }         //スピードストーンは生きてるか？
+    void DeActivateMe() { isAlive = false; }   //スピードストーンが死んだ
+    void ActivateMe() { isAlive = true; }      //スピードストーンがまだ生きてる
     void KillStone();
 
 private:
@@ -35,7 +31,6 @@ private:
     float jumpSpeed;
     int counter;
     bool onGround;
-    float sinAngle;
     int SpeedStoneG;
     float baseY;//生成時のY座標
     int animType; //状況
