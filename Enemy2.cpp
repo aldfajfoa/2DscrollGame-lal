@@ -95,14 +95,14 @@ void Enemy2::Draw()
 	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * E2_SIZE.h, E2_SIZE.w, E2_SIZE.h, hImage, TRUE);
 }
 
-void Enemy2::SetPosition(int x, int y)
+void Enemy2::SetPosition(const int& x, const int& y)
 {
 	transform_.position_.x = x;
 	transform_.position_.y = y;
 	baseY = y;
 }
 
-bool Enemy2::CollideCircle(float x, float y, float r)
+bool Enemy2::CollideCircle(const float& x, const float& y, const float& r)
 {
 	//x,y,r‚ª‘Šè‚Ì‰~‚Ìî•ñ
     //©•ª‚Ì‰~‚Ìî•ñ

@@ -109,7 +109,7 @@ void Enemy1::Draw()
 	DrawRectGraph(x-field->Getscroll(), y, 0, animFrame * E1_SIZE.h, E1_SIZE.w, E1_SIZE.h, hImage, TRUE, IsReverse);
 }
 
-bool Enemy1::CollideCircle(float x, float y, float r)
+bool Enemy1::CollideCircle(const float& x, const float& y, const float& r)
 {
 	//x,y,r‚ª‘Šè‚Ì‰~‚Ìî•ñ
 	//©•ª‚Ì‰~‚Ìî•ñ
@@ -146,7 +146,7 @@ void Enemy1::ReverseEnemy()
 	}
 }
 
-void Enemy1::SetPosition(int x, int y)
+void Enemy1::SetPosition(const int& x, const int& y)
 {
 	transform_.position_.x = x;
 	transform_.position_.y = y;

@@ -18,11 +18,12 @@ Lever::Lever(GameObject* scene)
 	transform_.position_.x = -100;
 	transform_.position_.y = -100;
 
-	hImage = LoadGraph("Assets/Lever_.png");
-	assert(hImage > 0);
 	ReversX = true;
 	lMas = ((LeverMaster*)(this->GetParent()));
 	fi = lMas->GetParent()->FindGameObject<Field>();
+
+	hImage = LoadGraph("Assets/Lever_.png");
+	assert(hImage > 0);
 	soundHandle = LoadSoundMem("Assets/ƒŒƒo[.mp3");
 	assert(soundHandle > 0);
 }
@@ -67,7 +68,7 @@ void Lever::Release()
 	DeleteGraph(hImage);
 }
 
-void Lever::SetPosition(int x, int y)
+void Lever::SetPosition(const int& x, const int& y)
 {
 	transform_.position_.x = x;
 	transform_.position_.y = y;

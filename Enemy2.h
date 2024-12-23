@@ -1,12 +1,8 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-/// <summary>
-/// 鳥（敵）
-/// </summary>
-
-class Enemy2
-	: public GameObject 
+//////鳥（敵）//////////
+class Enemy2: public GameObject 
 {
 public:
 	Enemy2(GameObject* scene);
@@ -14,25 +10,23 @@ public:
 	void Update() override;
 	void Draw() override;
 
-	/// <summary>
-	/// 座標をセットする
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	void SetPosition(int x, int y);
+	//座標をセットする
+	void SetPosition(const int& x, const int& y);
 
-	//円の当たり判定をする
-	bool CollideCircle(float x, float y, float r);
+	//円の当たり判定
+	bool CollideCircle(const float& x, const float& y, const float& r);
+
 private:
 	bool prevSpaceKey;
 	float jumpSpeed;
 	int counter;
 	bool onGround;
 	float sinAngle;
-	int hImage;
 	float baseY;//生成時のY座標
+	int frameCounter;
+
 	int animType; //状況
 	int animFrame;//コマ
-	int frameCounter;
+	int hImage;
 };
 

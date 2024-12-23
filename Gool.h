@@ -3,8 +3,7 @@
 #include "Field.h"
 class Camera;
 
-class Gool :
-    public GameObject
+class Gool :public GameObject
 {
 public:
 	Gool(GameObject* scene);
@@ -13,26 +12,19 @@ public:
 	void Draw() override;
 	int GetPositionX() { return transform_.position_.x; }
 
-	/// <summary>
-	/// 旗の座標をセットする
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	void SetPosition(int x, int y);
+	//座標をセットする
+	void SetPosition(const int& x, const int& y) {transform_.position_.x = x;
+		                                          transform_.position_.y = y;}
 
 	//円の当たり判定をする
-	bool CollideCircle(float x, float y, float r);
+	bool CollideCircle(const float& x, const float& y, const float& r);
 
-	void Reset();
 private:
-	//Field* field;
 	Camera* cam;
-	bool prevSpaceKey;
-	float jumpSpeed;
+
 	int counter;
-	bool onGround;
-	float sinAngle;
-	int hImage;
 	float baseY;//生成時のY座標
+
+	int hImage;
 };
 

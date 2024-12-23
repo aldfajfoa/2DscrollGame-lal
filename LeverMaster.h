@@ -7,8 +7,7 @@ class LeverBrock;
 class Camera;
 const int LEVER_NUM = 5;
 
-class LeverMaster :
-    public GameObject
+class LeverMaster :public GameObject
 {
 	Camera* cam;
 	Lever* Levers[LEVER_NUM];
@@ -18,16 +17,18 @@ public:
 	~LeverMaster();
 	void Update() override;
 	void Release() override;
-	void SetLeverPos(int num, int x, int y);
-	Camera* Getcam() { return cam; }
+
+	void SetLeverPos(const int &num, const int &x, const int &y);
 
 	/// <summary>
-	/// 
+	/// レバーブロックを生成
 	/// </summary>
 	/// <param name="x">x座標</param>
 	/// <param name="y">y座標</param>
 	/// <param name="ID">ブロックのID</param>
-	void birthLeverBrock(int x,int y,int ID);
+	void birthLeverBrock(const int &x,const int &y,const int &ID);
+
+	Camera* Getcam() { return cam; }
 	vector<LeverBrock*> GetlBrocks() { return lBrocks; }
 };
 

@@ -4,9 +4,7 @@ class Camera;
 class Player;
 class SceneManager;
 
-/// <summary>
-/// 地面（プレイフィールド）
-/// </summary>
+////// 地面（プレイフィールド）//////////
 class Field : public GameObject
 {
 public:
@@ -50,31 +48,33 @@ public:
 	int CollisionUp(int x, int y);
 
 	void IsScroll();
+	void SetScroll(int scroll_) { scroll = scroll_; }
+	int Getscroll() { return scroll; }
 	bool GetLeftSc() { return LeftSc; }
 	bool GetRightSc() { return RightSc; }
-	
-	void SetScroll(int scroll_) { scroll = scroll_; }
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
-	int Getscroll() { return scroll; }
-	void ChangeChip(int x, int y, int changeNum);
+
+	void ChangeChip(const int &x, const int &y, const int &changeNum);
+
 private:
 	const int CH_SIZE = 32;//マップチップサイズ
+
 	Camera* cam;
 	Player* pplayer;
 	SceneManager* SM;
+
 	int hImage;
 	int background;
 	int stone;
-	float middlePosX;
-	float middlePosY;
-	
-	bool IsWallBlock(int x, int y);
-	int* Map;
-	int Backnum;//背景の枚数
-	int width;
-	int height;
 	int controll;
+
+	int* Map;
+	float middlePosX, middlePosY;
+	int Backnum;//背景の枚数
+	int width, height;
 	int scroll;
 	bool LeftSc, RightSc;
+
+	bool IsWallBlock(const int& x, const int& y);
 };

@@ -83,13 +83,7 @@ void SpeedStone::Draw()
 	}
 }
 
-void SpeedStone::SetPosition(int x, int y)
-{
-	transform_.position_.x = x;
-	transform_.position_.y = y;
-}
-
-bool SpeedStone::CollideCircle(float x, float y, float r)
+bool SpeedStone::CollideCircle(const float& x, const float& y, const float& r)
 {
 	float myCenterX = transform_.position_.x + 32.0f;
 	float myCenterY = transform_.position_.y + 32.0f;

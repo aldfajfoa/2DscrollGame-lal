@@ -34,7 +34,6 @@ Player::Player(GameObject* parent)
 	transform_.position_.y = GROUND;
 	jumpSpeed = 0.0f;
 	onGround = true;
-	isAlive = true;
 	readyTimer = 1.5f;
 	p_speed = MOVE_SPEED;
 	STONE_NUMBER = 940;
@@ -194,7 +193,6 @@ void Player::Update()
 			animType = 4;
 			animFrame = 0;
 			pSs->DeActivateMe();
-			this->DeActivateMe();
 		}
 	}
 
@@ -244,13 +242,6 @@ void Player::Draw()
 
 void Player::Release()
 {
-}
-
-//プレイヤーのポジション
-void Player::SetPosition(int x, int y)
-{
-	transform_.position_.x = x;
-	transform_.position_.y = y;
 }
 
 void Player::ControlCollision()
@@ -371,7 +362,7 @@ bool Player::MovePlayer()
 }
 
 
-bool Player::CollideCircle(float x, float y, float r)
+bool Player::CollideCircle(const float& x, const float& y, const float& r)
 {
 	float myCenterX = transform_.position_.x + (P_SIZE.w / 2);
 	float myCenterY = transform_.position_.y + (P_SIZE.h / 2);

@@ -12,7 +12,7 @@
 #include "Engine/SceneManager.h"
 
 Field::Field(GameObject* scene)
-	:GameObject(scene,"Field")
+	:GameObject(scene,"Field"),Map(nullptr),scroll(0)
 {
 	hImage = LoadGraph("Assets/bgchar.png");
 	background = LoadGraph("Assets/mori.jpg");
@@ -22,8 +22,7 @@ Field::Field(GameObject* scene)
 	assert(background > 0);
 	assert(stone > 0);
 	assert(controll > 0);
-	Map = nullptr;
-	scroll = 0;
+
 	SM = (SceneManager*)GetParent()->GetParent();
 }
 
@@ -201,9 +200,7 @@ void Field::Draw()
 	DrawGraph(10,60, controll, TRUE);
 }
 
-void Field::Release()
-{
-}
+void Field::Release(){}
 
 int Field::CollisionRight(int x, int y)
 {
@@ -268,15 +265,12 @@ void Field::IsScroll()
 	}
 }
 
-void Field::ChangeChip(int x, int y,int changeNum)
+void Field::ChangeChip(const int& x, const int& y, const int& changeNum)
 {
-	y;
-	x;
-	changeNum;
 	Map[y * width + x] = changeNum;
 }
 
-bool Field::IsWallBlock(int x, int y)
+bool Field::IsWallBlock(const int& x, const int& y)
 {
 	Player* pplayer = GetParent()->FindGameObject<Player>();
 	if (pplayer != nullptr)

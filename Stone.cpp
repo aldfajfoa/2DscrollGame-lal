@@ -64,7 +64,7 @@ void Stone::Draw()
 	DrawGraph(x-pField->Getscroll(), y, StoneG, TRUE);
 }
 
-void Stone::SetPosition(XMFLOAT3 pos)
+void Stone::SetPosition(const XMFLOAT3& pos)
 {
 	transform_.position_ = pos;
 	timer = 150;

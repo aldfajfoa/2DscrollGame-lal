@@ -25,17 +25,15 @@ void LeverMaster::Update()
 	int x = (int)transform_.position_.x - cam->GetValue();
 }
 
-void LeverMaster::Release()
-{
-}
+void LeverMaster::Release(){}
 
-void LeverMaster::SetLeverPos(int num, int x, int y)
+void LeverMaster::SetLeverPos(const int& num, const int& x, const int& y)
 {
 	Levers[num - 600]->SetPosition(x, y);
 	Levers[num - 600]->SetLeverID(num - 600);
 }
 
-void LeverMaster::birthLeverBrock(int x, int y, int ID)
+void LeverMaster::birthLeverBrock(const int& x, const int& y, const int& ID)
 {
 	LeverBrock* l = Instantiate<LeverBrock>(GetParent());
 	l->SetPosition(x, y);

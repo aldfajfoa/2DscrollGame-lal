@@ -44,11 +44,6 @@ void Gool::Update()
 	{
 		counter = 160;
 	}
-
-	if (CheckHitKey(KEY_INPUT_R))
-	{
-		Reset();
-	}
 }
 
 void Gool::Draw()
@@ -61,13 +56,7 @@ void Gool::Draw()
 	DrawGraph(x-field->Getscroll(), y, hImage, TRUE);
 }
 
-void Gool::SetPosition(int x, int y)
-{
-	transform_.position_.x = x;
-	transform_.position_.y = y;
-}
-
-bool Gool::CollideCircle(float x, float y, float r)
+bool Gool::CollideCircle(const float& x, const float& y, const float& r)
 {
 	float myCenterX = transform_.position_.x + 100.0f;
 	float myCenterY = transform_.position_.y + 100.0f;
@@ -77,9 +66,4 @@ bool Gool::CollideCircle(float x, float y, float r)
 	if ((dx * dx + dy * dy) < (r + myR) * (r + myR))
 		return true;
 	return false;
-}
-
-void Gool::Reset()
-{
-	KillMe();
 }

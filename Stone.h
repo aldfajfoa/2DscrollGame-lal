@@ -11,15 +11,14 @@ public:
 	~Stone();
 	void Update() override;
 	void Draw() override;
-	void SetPosition(XMFLOAT3 pos);
-	void ControlCollision();//“–‚½‚è”»’è
+	void SetPosition(const XMFLOAT3 &pos);
 	void Reset();
 
 private:
 	Player* pPlayer;
 	Field* pField;
+
 	int tmpPosx, tmpPosy;
-	int StoneG;
 	int timer;
 	int ceiling;
 	int Ground;
@@ -30,7 +29,10 @@ private:
 	bool IsReverse;
 	float dir;
 	float MoveSpeed;
+	
+	int StoneG;
 
-	void SetMoveSpeed(float speed) { MoveSpeed = speed; }
+	void ControlCollision();//“–‚½‚è”»’è
+	void SetMoveSpeed(const float &speed) { MoveSpeed = speed; }
 	void WarpStone();
 };

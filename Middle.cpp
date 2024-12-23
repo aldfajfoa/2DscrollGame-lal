@@ -23,11 +23,9 @@ void Middle::Draw()
 	DrawGraph(x - field->Getscroll(), y, middle, TRUE);
 }
 
-void Middle::Release()
-{
-}
+void Middle::Release(){}
 
-bool Middle::CollideCircle(float x, float y, float r)
+bool Middle::CollideCircle(const float& x, const float& y, const float& r)
 {
 	//x,y,r‚ª‘Šè‚Ì‰~‚Ìî•ñ
 	//©•ª‚Ì‰~‚Ìî•ñ

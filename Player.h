@@ -4,9 +4,7 @@ class Camera;
 class Field;
 class LeverMaster;
 
-/// <summary>
-/// プレイヤーキャラ
-/// </summary>
+////// プレイヤー //////////
 class Player : public GameObject
 {
 public:
@@ -17,28 +15,24 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-	/// <summary>
-	/// プレイヤーの座標をセットする
-	/// </summary>
-	/// <param name="x">X座標</param>
-	/// <param name="y">Y座標</param>
-	void SetPosition(int x, int y);
+
+	//座標をセットする
+	void SetPosition(const int& x, const int& y) {transform_.position_.x = x;
+		                                          transform_.position_.y = y;}
+	void SetGround(const float &_ground) { Ground = _ground; }
+	void Setp_speed(const float &speed) { p_speed = speed; }
 	int GetPositionX() { return transform_.position_.x; }
 	bool GetReversX() { return ReversX; }
-	void ControlCollision();
-	void SetGround(float _ground) { Ground = _ground; }
-	bool MovePlayer();
-	bool IsActive() { return isAlive; }//isAliveがtrueかどうか
-	void DeActivateMe() { isAlive = false; }
-	void ActivateMe() { isAlive = true; }
-	void Setp_speed(float speed) { p_speed = speed; }
 	float GetMOVE_SPEED() { return MOVE_SPEED; }
 	float GetMOVE_SPEED2() { return MOVE_SPEED2; }
-	bool CollideCircle(float x, float y, float r);
+
+	bool MovePlayer();
+	void ControlCollision();
+	bool CollideCircle(const float& x, const float& y, const float& r);
 
 private:
-	const float MOVE_SPEED = 2.0f;
-	const float MOVE_SPEED2 = 6.0f;
+	const float MOVE_SPEED = 2.0f;//通常スピード
+	const float MOVE_SPEED2 = 6.0f;//スピードストーンを取った時のスピード
 
 	XINPUT_STATE input;
 	GameObject* sceneTop;
@@ -46,14 +40,10 @@ private:
 	Field* field;
 	LeverMaster* lMas;
 
-    int PlayerG;
-	int kazu;
 	bool prevSpaceKey;
 	float jumpSpeed;
 	bool onGround;
 	int counter;
-	int animType; //状況
-	int animFrame;//コマ
 	int frameCounter;
 	float readyTimer;
 	bool ReversX;
@@ -61,9 +51,12 @@ private:
 	int ceiling;
 	int Ground;
 	bool firstGround;
-	bool isAlive;
 	float p_speed;
 
+	int animType; //状況
+	int animFrame;//コマ
+	int PlayerG;//プレイヤー画像のハンドル
+	int kazu;
 	int StonesoundHandle;// 音声のハンドル
 	int WalkHandle;//歩く効果音
 	int ClearSound;
