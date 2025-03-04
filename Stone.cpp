@@ -53,7 +53,7 @@ void Stone::Update()
 		Reset();
 	}
 
-	WarpStone();//プレイヤーを石の位置に移動させる
+	WarpStone();//プレイヤーを石の位置に移動
 }
 
 void Stone::Draw()
